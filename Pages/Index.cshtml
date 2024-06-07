@@ -1,0 +1,64 @@
+﻿@page
+@{
+    ViewData["Title"] = "AJAX Unobtrusive - Kitchen Sink";
+    string _namespace = "unobtrusive-";
+    string newContainer = $"{_namespace}-new-container";
+    string listContainer = $"{_namespace}-list-container";
+    string readOnlyContainer = $"{_namespace}-readonly-container";
+}
+
+@* 
+The anchor tag will get the partial. On success, the success function will decide if the state of the page is persisted or not.
+*@
+<a class="btn btn-outline-danger"
+   href="@htmx_kitchensink.Partials.WorkItem.NewController.GetLink(Url)"
+   data-ajax="true"
+   data-ajax-update="#@newContainer"
+   data-ajax-success="newFormIsVisible"
+   data-ajax-failure="showErrorMessage">
+    New Work Item
+</a>
+
+<div id="@newContainer">
+
+</div>
+
+<div id="@listContainer">
+    <table>
+        <tr>
+        </tr>
+    </table>
+</div>
+
+<div id="@readOnlyContainer">
+
+</div>
+
+@section Scripts {
+    <script src="~/js/ajax-unobtrusive.js"></script>
+
+    <script>
+        function newFormIsVisible() {
+
+            initAjaxElements();
+
+            console.log("Decide if the page state is persisted.");
+        }
+
+        function showErrorMessage() {
+            console.log("An error occurred");
+        }
+
+        function newWorkItemCreated() {
+            console.log("Work item created");
+            alert("Work item created");
+        }
+
+        function newWorkItemFailed(result) {
+            console.log("Work item created");
+            document.getelementbyid("@newContainer").innerhtml = result;
+            alert("New work item failed");
+        }
+
+    </script>
+}

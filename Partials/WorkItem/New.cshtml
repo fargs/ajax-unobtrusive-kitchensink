@@ -1,0 +1,8 @@
+﻿<form method="post" action="@htmx_kitchensink.Partials.WorkItem.NewController.PostLink(Url)"
+      data-ajax="true"
+      data-ajax-success="newWorkItemCreated"
+      data-ajax-failure="newWorkItemFailed">
+    <label>What is your name?</label>
+    <input name="Name" type="text" />
+    <input type="submit" value="Submit" />
+</form>
