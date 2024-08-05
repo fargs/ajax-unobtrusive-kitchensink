@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace htmx_kitchensink.Partials.YourName;
+namespace ajax_unobtrusive_kitchensink.Partials.WorkItem;
 
-
-[Route("/partials/yourname")]
+[Route("/partials/workitem/{workItemId}")]
 public class ReadOnlyController : Controller
 {
-    public static readonly string PartialName = "/Partials/YourName/ReadOnly.cshtml";
+    public static readonly string PartialName = "/Partials/WorkItem/ReadOnly.cshtml";
 
     [HttpGet]
-    public IActionResult Get()
+    [Route("/partials/workitem/{workItemId}")]
+    public IActionResult Get(int workItemId)
     {
         return PartialView(PartialName);
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace htmx_kitchensink.Partials.WorkItem;
+namespace ajax_unobtrusive_kitchensink.Partials.WorkItem;
 
 [Route("/partials/workitem/new")]
 public class NewController : Controller
@@ -18,7 +18,7 @@ public class NewController : Controller
     [HttpPost]
     public IActionResult Post(NewModel model)
     {
-        return Ok();
+        return Created();
     }
 }
 

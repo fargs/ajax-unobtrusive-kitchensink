@@ -1,4 +1,5 @@
 ﻿@page
+@model ajax_unobtrusive_kitchensink.Pages.IndexPage
 @{
     ViewData["Title"] = "AJAX Unobtrusive - Kitchen Sink";
     string _namespace = "unobtrusive-";
@@ -11,7 +12,7 @@
 The anchor tag will get the partial. On success, the success function will decide if the state of the page is persisted or not.
 *@
 <a class="btn btn-outline-danger"
-   href="@htmx_kitchensink.Partials.WorkItem.NewController.GetLink(Url)"
+   href="@ajax_unobtrusive_kitchensink.Partials.WorkItem.NewController.GetLink(Url)"
    data-ajax="true"
    data-ajax-update="#@newContainer"
    data-ajax-success="newFormIsVisible"
@@ -24,10 +25,7 @@ The anchor tag will get the partial. On success, the success function will decid
 </div>
 
 <div id="@listContainer">
-    <table>
-        <tr>
-        </tr>
-    </table>
+    <partial name="@ajax_unobtrusive_kitchensink.Partials.WorkItem.ListController.PartialName" model="Model.ListPartial"></partial>
 </div>
 
 <div id="@readOnlyContainer">
@@ -52,6 +50,8 @@ The anchor tag will get the partial. On success, the success function will decid
         function newWorkItemCreated() {
             console.log("Work item created");
             alert("Work item created");
+
+            fetch()
         }
 
         function newWorkItemFailed(result) {

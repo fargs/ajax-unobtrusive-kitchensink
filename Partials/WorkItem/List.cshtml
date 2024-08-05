@@ -1,0 +1,24 @@
+﻿@model ListPartial
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Status</td>
+            <td>Priority</td>
+            <td>Due Date</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TableRows)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Status</td>
+                <td>@item.Priority</td>
+                <td>@item.DueDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
