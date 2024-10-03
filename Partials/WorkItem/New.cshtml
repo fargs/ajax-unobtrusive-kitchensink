@@ -2,10 +2,11 @@
       method="post"
       action="@ajax_unobtrusive_kitchensink.Partials.WorkItem.NewController.PostLink(Url)"
       data-ajax="true"
-      data-ajax-success="newWorkItemCreated"
+      data-ajax-success="workItemCreated"
       data-ajax-failure="newWorkItemFailed"
       class="form-background">
     <label>What is your name?</label>
     <input name="Name" type="text" />
     <input type="submit" value="Submit" />
 </form>
+@DateTime.UtcNow.ToLocalTime()

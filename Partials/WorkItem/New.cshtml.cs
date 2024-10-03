@@ -18,7 +18,8 @@ public class NewController : Controller
     [HttpPost]
     public IActionResult Post(NewModel model)
     {
-        return Created();
+        var listLink = ListController.GetLink(Url);
+        return Created(listLink, new { ListLink = listLink });
     }
 }
 

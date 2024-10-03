@@ -2,7 +2,7 @@
 @model ajax_unobtrusive_kitchensink.Pages.IndexPage
 @{
     ViewData["Title"] = "AJAX Unobtrusive - Kitchen Sink";
-    string _namespace = "unobtrusive-";
+    string _namespace = "unobtrusive";
     string newContainer = $"{_namespace}-new-container";
     string listContainer = $"{_namespace}-list-container";
     string readOnlyContainer = $"{_namespace}-readonly-container";
@@ -25,7 +25,7 @@ The anchor tag will get the partial. On success, the success function will decid
 </div>
 
 <div id="@listContainer">
-    <partial name="@ajax_unobtrusive_kitchensink.Partials.WorkItem.ListController.PartialName" model="Model.ListPartial"></partial>
+    <partial name="@ajax_unobtrusive_kitchensink.Partials.WorkItem.ListPartial.PartialName" model="Model.ListPartial" />
 </div>
 
 <div id="@readOnlyContainer">
@@ -38,6 +38,7 @@ The anchor tag will get the partial. On success, the success function will decid
     <script>
         function newFormIsVisible() {
 
+            // this is a library function that will initialize the ajax elements
             initAjaxElements();
 
             console.log("Decide if the page state is persisted.");
@@ -47,11 +48,23 @@ The anchor tag will get the partial. On success, the success function will decid
             console.log("An error occurred");
         }
 
-        function newWorkItemCreated() {
+        function workItemCreated(data, status, xhr) {
+
             console.log("Work item created");
+
             alert("Work item created");
 
-            fetch()
+            var json = JSON.parse(data);
+
+            fetch(json.listLink)
+                .then(response => response.text())
+                .then(html => {
+                    // Insert the fetched HTML into the partial container
+                    document.getElementById('@listContainer').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching the partial:', error);
+                });
         }
 
         function newWorkItemFailed(result) {

@@ -5,19 +5,18 @@ namespace ajax_unobtrusive_kitchensink.Partials.WorkItem;
 [Route("/partials/workitems")]
 public class ListController : Controller
 {
-    public static readonly string PartialName = "/Partials/WorkItem/List.cshtml";
-
+    public static string GetLink(IUrlHelper urlHelper) => urlHelper.Content("~/partials/workitems");
     [HttpGet]
-    [Route("/partials/workitems")]
     public IActionResult Get(int workItemId)
     {
         var partial = ListPartial.Create();
-        return PartialView(PartialName, partial);
+        return PartialView(ListPartial.PartialName, partial);
     }
 }
 
 public class ListPartial
 {
+    public static readonly string PartialName = "/Partials/WorkItem/List.cshtml";
     private ListPartial() { }
     public static ListPartial Create()
     {
